@@ -9,6 +9,7 @@ import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import AllExpenses from './screens/AllExpenses';
 import { GlobalStyles } from './constants/styles';
+import IconButton from './UI/IconButton';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,10 +29,13 @@ function ExpensesOverview() {
 
         // paddingTop: 20,
       },
-      tabBarIconStyle: {
-        // marginHorizontal: 20,
-        // marginVertical: 10
-      }
+      // tabBarIconStyle: {
+      //   // marginHorizontal: 20,
+      //   // marginVertical: 10
+      // },
+      headerRight: ({ tintColor }) => (
+        <IconButton icon='add' size={24} color={tintColor} onPress={() => { }} />
+      ),
 
     }}>
     <BottomTabs.Screen
