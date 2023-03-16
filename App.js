@@ -22,7 +22,7 @@ function ExpensesOverview() {
       tabBarActiveTintColor: GlobalStyles.colors.accent500,
       tabBarStyle: {
         backgroundColor: GlobalStyles.colors.primary500,
-        borderRadius: 10,
+        // borderRadius: 10,
         // marginHorizontal: 10,
         // marginVertical: 12,
 
