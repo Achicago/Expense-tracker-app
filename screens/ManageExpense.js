@@ -1,11 +1,14 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { GlobalStyles } from "../constants/styles";
+import { ExpensesContext } from "../store/expenses-context";
 import Button from "../UI/Button";
 import IconButton from "../UI/IconButton";
 
 
 function ManageExpense({ route, navigation }) {
+
+    const expensesCtx = useContext(ExpensesContext);
 
     const editedExpenseId = route.params?.expenseId; // Safest way to drill into object that might be undefined.
     const isEditing = !!editedExpenseId; //Convert a value into a boulean
@@ -14,14 +17,13 @@ function ManageExpense({ route, navigation }) {
         navigation.setOptions({
             title: isEditing ? 'Edit Expense' : 'Add Expense'
         })
-
     },
         [navigation, isEditing]
     )
 
-    function deleteExpenseHandler(expense) {
+    function deleteExpenseHandler() {
+        expensesCtx.deleteExpense(editedExpenseId)
         navigation.goBack();
-
     }
 
     function cancelHandler() {
@@ -29,8 +31,25 @@ function ManageExpense({ route, navigation }) {
     }
 
     function confirmHandler() {
+        if (isEditing) {
+            expensesCtx.updateExpense(
+                editedExpenseId,
+                {
+                    description: 'Test!!!',
+                    amount: 29.99,
+                    date: new Date('2023-05-19'),
+                }
+            );
+        } else {
+            expensesCtx.addExpense(
+                {
+                    description: 'Test',
+                    amount: 19.99,
+                    date: new Date('2023-05-19'),
+                }
+            );
+        }
         navigation.goBack();
-
     }
 
     return (
