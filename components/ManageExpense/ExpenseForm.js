@@ -26,7 +26,14 @@ function ExpenseForm() {
                 }}
             />
 
-            <Input label="Description" />
+            <Input
+                label="Description"
+                textInputConfig={{
+                    multiline: true,
+                    // autoCorrect: true, // default is true
+                    // autoCapitalise: 'none',
+                }}
+            />
         </View>
     );
 }
