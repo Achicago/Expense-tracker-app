@@ -1,18 +1,17 @@
-import { useContext, useLayoutEffect } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import ExpenseForm from "../components/ManageExpense/ExpenseForm";
-import { GlobalStyles } from "../constants/styles";
-import { ExpensesContext } from "../store/expenses-context";
-import Button from "../UI/Button";
-import IconButton from "../UI/IconButton";
+import { useContext, useLayoutEffect } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 
+import ExpenseForm from '../components/ManageExpense/ExpenseForm';
+import Button from '../UI/Button';
+import IconButton from '../UI/IconButton';
+import { GlobalStyles } from '../constants/styles';
+import { ExpensesContext } from '../store/expenses-context';
 
 function ManageExpense({ route, navigation }) {
-
     const expensesCtx = useContext(ExpensesContext);
 
-    const editedExpenseId = route.params?.expenseId; // Safest way to drill into object that might be undefined.
-    const isEditing = !!editedExpenseId; //Convert a value into a boulean
+    const editedExpenseId = route.params?.expenseId;
+    const isEditing = !!editedExpenseId;
 
     const selectedExpense = expensesCtx.expenses.find(
         (expense) => expense.id === editedExpenseId
@@ -20,14 +19,12 @@ function ManageExpense({ route, navigation }) {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: isEditing ? 'Edit Expense' : 'Add Expense'
-        })
-    },
-        [navigation, isEditing]
-    )
+            title: isEditing ? 'Edit Expense' : 'Add Expense',
+        });
+    }, [navigation, isEditing]);
 
     function deleteExpenseHandler() {
-        expensesCtx.deleteExpense(editedExpenseId)
+        expensesCtx.deleteExpense(editedExpenseId);
         navigation.goBack();
     }
 
@@ -37,42 +34,31 @@ function ManageExpense({ route, navigation }) {
 
     function confirmHandler(expenseData) {
         if (isEditing) {
-            expensesCtx.updateExpense(
-                editedExpenseId,
-                expenseData
-            );
+            expensesCtx.updateExpense(editedExpenseId, expenseData);
         } else {
-            expensesCtx.addExpense(
-                {
-                    description: 'Test',
-                    amount: 19.99,
-                    date: new Date('2023-05-19'),
-                }
-            );
+            expensesCtx.addExpense(expenseData);
         }
         navigation.goBack();
     }
 
     return (
-        <View style={styles.container} >
-
+        <View style={styles.container}>
             <ExpenseForm
                 submitButtonLabel={isEditing ? 'Update' : 'Add'}
-                onCancel={cancelHandler}
                 onSubmit={confirmHandler}
+                onCancel={cancelHandler}
                 defaultValues={selectedExpense}
             />
-
-            {isEditing &&
+            {isEditing && (
                 <View style={styles.deleteContainer}>
                     <IconButton
-                        icon='trash'
-                        size={36}
+                        icon="trash"
                         color={GlobalStyles.colors.error500}
+                        size={36}
                         onPress={deleteExpenseHandler}
                     />
                 </View>
-            }
+            )}
         </View>
     );
 }
@@ -85,14 +71,11 @@ const styles = StyleSheet.create({
         padding: 24,
         backgroundColor: GlobalStyles.colors.primary800,
     },
-
     deleteContainer: {
         marginTop: 16,
         paddingTop: 8,
         borderTopWidth: 2,
         borderTopColor: GlobalStyles.colors.primary200,
-        alignItems: "center",
+        alignItems: 'center',
     },
-})
-
-
+});
