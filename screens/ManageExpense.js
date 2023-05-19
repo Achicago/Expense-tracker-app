@@ -14,6 +14,10 @@ function ManageExpense({ route, navigation }) {
     const editedExpenseId = route.params?.expenseId; // Safest way to drill into object that might be undefined.
     const isEditing = !!editedExpenseId; //Convert a value into a boulean
 
+    const selectedExpense = expensesCtx.expenses.find(
+        (expense) => expense.id === editedExpenseId
+    );
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: isEditing ? 'Edit Expense' : 'Add Expense'
@@ -31,15 +35,11 @@ function ManageExpense({ route, navigation }) {
         navigation.goBack();
     }
 
-    function confirmHandler() {
+    function confirmHandler(expenseData) {
         if (isEditing) {
             expensesCtx.updateExpense(
                 editedExpenseId,
-                {
-                    description: 'Test!!!',
-                    amount: 29.99,
-                    date: new Date('2023-05-19'),
-                }
+                expenseData
             );
         } else {
             expensesCtx.addExpense(
@@ -59,6 +59,8 @@ function ManageExpense({ route, navigation }) {
             <ExpenseForm
                 submitButtonLabel={isEditing ? 'Update' : 'Add'}
                 onCancel={cancelHandler}
+                onSubmit={confirmHandler}
+                defaultValues={selectedExpense}
             />
 
             {isEditing &&
