@@ -9,7 +9,7 @@
 - ... For more information check out package.json file
 
 
-![](./screenshot1.png) 
+![image](./screenshot1.png) 
 ![](./screenshot2.png)
 ![](./screenshot3.png)
 ![](./screenshot4.png)
