@@ -9,8 +9,7 @@
 - ... For more information check out package.json file
 
 
-![test](./screenshot1.png) 
-<img src="./screenshot1.png" width="100" height="100">
+<img src="./screenshot1.png" width="150" height="300">
 ![](./screenshot2.png)
 ![](./screenshot3.png)
 ![](./screenshot4.png)
