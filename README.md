@@ -9,8 +9,8 @@
 - ... For more information check out package.json file
 
 
-![Screenshot](./screenshot1.png) 
-![Screenshot](./screenshot2.png)
-![Screenshot](./screenshot3.png)
-![Screenshot](./screenshot4.png)
-![Screenshot](./screenshot5.png)
+![](./screenshot1.png | width=100 | height=300) 
+![](./screenshot2.png)
+![](./screenshot3.png)
+![](./screenshot4.png)
+![](./screenshot5.png)
